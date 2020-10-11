@@ -19,6 +19,12 @@ services:
     networks:
       - gpl_stack
 
+  pm2papp:
+    build: ./pm2papp
+    container_name: pm2papp
+    volumes:
+      - ./pm2papp/logs:/var/log/pm2papp
+
   # prometheus:
   #   image: prom/prometheus:v2.21.0
   #   volumes:
