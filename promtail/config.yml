@@ -9,10 +9,27 @@ clients:
   - url: http://loki:3100/loki/api/v1/push
 
 scrape_configs:
-- job_name: system
+- job_name: pm2app
   static_configs:
   - targets:
       - localhost
     labels:
-      job: varlogs
-      __path__: /var/log/*/*log
+      job: pm2papp
+      __path__: /var/log/pm2papp/*log
+      env: prod
+- job_name: loki
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: loki
+      __path__: /var/log/loki/*log
+      env: prod
+- job_name: prometail
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: prometail
+      __path__: /var/log/prometail.log
+      env: prod

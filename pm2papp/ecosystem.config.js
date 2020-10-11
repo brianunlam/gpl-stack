@@ -4,7 +4,6 @@ module.exports = {
     script: "./src/app.js",
     error_file: '/var/log/pm2papp/err.log',
     out_file: '/var/log/pm2papp/out.log',
-    log_file: '/var/log/pm2papp/combined.log',
     env: {
       NODE_ENV: "development",
     },

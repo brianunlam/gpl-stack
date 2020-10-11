@@ -6,6 +6,7 @@ networks:
 volumes:
   grafana-storage:
   loki-storage:
+  loki-logs:
 
 services:
 
@@ -39,14 +40,18 @@ services:
   #     - gpl_stack
 
   loki:
-    image: grafana/loki:1.6.1
+    build: ./loki
     container_name: loki
     volumes:
+    - ./loki/local-config.yaml:/etc/loki/local-config.yml
     - loki-storage:/loki
-
+    - loki-logs:/var/log
     ports:
       - 3100:3100
-    command: -config.file=/etc/loki/local-config.yaml
+    command: >-
+      -c
+      "/usr/bin/loki -config.file=/etc/loki/local-config.yml 2>&1 | tee /var/log/loki.log"
+    entrypoint: /bin/sh
     networks:
       - gpl_stack
 
@@ -56,6 +61,11 @@ services:
     volumes:
       - ./promtail/config.yml:/etc/promtail/config.yml
       - ./pm2papp/logs:/var/log/pm2papp
+      - loki-logs:/var/log/loki
+    entrypoint: /bin/sh
+    command: >-
+        -c
+        "/usr/bin/promtail -config.file=/etc/promtail/config.yml 2>&1 | tee /var/log/prometail.log"
     networks:
       - gpl_stack
 
