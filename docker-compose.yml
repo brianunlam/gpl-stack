@@ -5,6 +5,7 @@ networks:
 
 volumes:
   grafana-storage:
+  loki-storage:
 
 services:
 
@@ -37,20 +38,26 @@ services:
   #   networks:
   #     - gpl_stack
 
-  # loki:
-  #   image: grafana/loki:1.6.1
-  #   ports:
-  #     - 3100:3100
-  #   command: -config.file=/etc/loki/local-config.yaml
-  #   networks:
-  #     - gpl_stack
+  loki:
+    image: grafana/loki:1.6.1
+    container_name: loki
+    volumes:
+    - loki-storage:/loki
 
-  # promtail:
-  #   image: grafana/promtail:1.6.1
-  #   volumes:
-  #     - app_data:/var/log
-  #   networks:
-  #     - gpl_stack
+    ports:
+      - 3100:3100
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - gpl_stack
+
+  promtail:
+    image: grafana/promtail:1.6.1
+    container_name: promtail
+    volumes:
+      - ./promtail/config.yml:/etc/promtail/config.yml
+      - ./pm2papp/logs:/var/log/pm2papp
+    networks:
+      - gpl_stack
 
   # node-pm2-powered-app:
   #   build: ./app

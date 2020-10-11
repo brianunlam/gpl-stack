@@ -7,7 +7,7 @@
 1. ~~Set up grafana~~
 2. ~~Configure persistency for the container~~
 3. ~~Create pm2 powered container with demo app (it should generate random logs using setTimeout)~~
-4. Set up loki/prometail, persist container, get logs from pm2papp
+4. ~~Set up loki/prometail, persist containers, get logs from pm2papp~
 5. Integrate grafana/loki (create simple dashboard)
 6. Set up prometheus
 7. Integrate prometheus with pm2 metrics (create simple dashboard)
