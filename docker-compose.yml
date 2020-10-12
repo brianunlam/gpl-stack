@@ -27,17 +27,17 @@ services:
     volumes:
       - ./pm2papp/logs:/var/log/pm2papp
 
-  # prometheus:
-  #   image: prom/prometheus:v2.21.0
-  #   volumes:
-  #     - ./prometheus/:/etc/prometheus/
-  #   command:
-  #     - "--config.file=/etc/prometheus/prometheus.yml"
-  #     - "--storage.tsdb.path=/prometheus"
-  #   ports:
-  #     - 9090:9090
-  #   networks:
-  #     - gpl_stack
+  prometheus:
+    image: prom/prometheus:v2.21.0
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+    ports:
+      - 9090:9090
+    networks:
+      - gpl_stack
 
   loki:
     build: ./loki
