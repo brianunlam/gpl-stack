@@ -7,6 +7,7 @@ volumes:
   grafana-storage:
   loki-storage:
   loki-logs:
+  redis-storage:
 
 services:
 
@@ -73,20 +74,28 @@ services:
     networks:
       - gpl_stack
 
-  # node-pm2-powered-app:
-  #   build: ./app
-  #   ports:
-  #     - 8081:80
-  #   volumes:
-  #     - app_data:/var/log
-  #   networks:
-  #     - grafana
+  redis-exporter:
+    build: ./redis-exporter
+    container_name: redis-exporter
+    ports:
+      - 9121:9121
+    networks:
+      - gpl_stack
 
-  # redis:
-  #   build: ./app
-  #   ports:
-  #     - 8081:80
-  #   volumes:
-  #     - app_data:/var/log
-  #   networks:
-  #     - grafana
+  redis1:
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-storage:/data
+    networks:
+      - gpl_stack
+
+  redis2:
+    image: redis:alpine
+    ports:
+      - 6380:6379
+    volumes:
+      - redis-storage:/data
+    networks:
+      - gpl_stack

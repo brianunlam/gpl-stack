@@ -11,6 +11,6 @@
 5. ~~Make Loki and promtail to collect their own logs~~
 6. ~~Set up prometheus~~
 7. ~~Integrate prometheus with pm2 metrics (create simple dashboard)~~
-8. Set up redis and integrate with pm2papp (read and write randomly)
+8. ~~Set up redis and integrate with prometheus~~
 9. Send custom metrics from pm2papp using node-prometheus
 
