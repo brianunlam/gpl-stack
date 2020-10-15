@@ -26,3 +26,7 @@ scrape_configs:
         target_label: instance
       - target_label: __address__
         replacement: redis-exporter:9121
+
+  - job_name: "example-nodejs-app"
+    static_configs:
+      - targets: ["pm2papp:8080"]

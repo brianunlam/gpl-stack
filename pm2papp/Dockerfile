@@ -13,6 +13,7 @@ RUN npm install --production
 
 # Expose the listening port of your app
 EXPOSE 9209
+EXPOSE 8080
 
 # Show current folder structure in logs
 

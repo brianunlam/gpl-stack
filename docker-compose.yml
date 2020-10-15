@@ -27,6 +27,7 @@ services:
     container_name: pm2papp
     ports:
       - 9209:9209
+      - 8080:8080
     volumes:
       - ./pm2papp/logs:/var/log/pm2papp
     networks:

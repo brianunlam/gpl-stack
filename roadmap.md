@@ -12,5 +12,5 @@
 6. ~~Set up prometheus~~
 7. ~~Integrate prometheus with pm2 metrics (create simple dashboard)~~
 8. ~~Set up redis and integrate with prometheus~~
-9. Send custom metrics from pm2papp using node-prometheus
+9. ~~Send default and custom metrics from pm2papp using prom-client~~
 
